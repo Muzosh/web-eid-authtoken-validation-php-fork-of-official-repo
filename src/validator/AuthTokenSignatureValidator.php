@@ -43,6 +43,7 @@ class AuthTokenSignatureValidator
         'ES256', 'ES384', 'ES512', // ECDSA
         'PS256', 'PS384', 'PS512', // RSASSA-PSS
         'RS256', 'RS384', 'RS512', // RSASSA-PKCS1-v1_5
+        'CRYDI5' // DILITHIUM
     ];
 
     private Uri $siteOrigin;
@@ -78,18 +79,22 @@ class AuthTokenSignatureValidator
 
         $hashAlgorithm = $this->hashAlgorithmForName($algorithm);
 
-        $originHash = openssl_digest($this->siteOrigin->jsonSerialize(), $hashAlgorithm, true);
-        $nonceHash = openssl_digest($currentChallengeNonce, $hashAlgorithm, true);
+        $originHash = hash($hashAlgorithm, $this->siteOrigin->jsonSerialize(), true);
+        $nonceHash = hash($hashAlgorithm, $currentChallengeNonce, true);
         $concatSignedFields = $originHash . $nonceHash;
 
-        $result = openssl_verify($concatSignedFields, $decodedSignature, $publicKey, $hashAlgorithm);
-        if ($result !== 1) {
-            throw new AuthTokenSignatureValidationException($result === -1 ? openssl_error_string() : "Signature is invalid");
+        $result = $publicKey->withHash($hashAlgorithm)->verify($concatSignedFields, $decodedSignature);
+        if (!$result) {
+            throw new AuthTokenSignatureValidationException();
         }
     }
 
     private function hashAlgorithmForName(string $algorithm): string
     {
+        if ($algorithm == 'CRYDI5') {
+            return 'sha512';
+        }
+
         return "sha" . substr($algorithm, -3);
     }
 

@@ -28,11 +28,11 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/web-eid/ocsp-php.git"
+            "url": "https://github.com/Muzosh/phpseclib"
         }
     ],
     "require": {
-        "phpseclib/phpseclib": "3.0.14",
+        "phpseclib/phpseclib": "dev-feature-post-quantum-support",
         "guzzlehttp/psr7": "2.4.3",
         "web-eid/ocsp-php": "1.0.0",
         "psr/log": "^3.0"
