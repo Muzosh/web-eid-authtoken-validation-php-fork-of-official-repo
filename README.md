@@ -1,3 +1,7 @@
+# branch: feature-post-quantum-support
+This library utilizes [PQC-phpseclib](https://github.com/Muzosh/phpseclib/tree/feature-post-quantum-support) to enable support for post-quantum algorithms.
+Tested with Dilithium5 within https://github.com/Muzosh/Post-Quantum-Authentication-On-The-Web
+
 # web-eid-authtoken-validation-php
 
 ![European Regional Development Fund](https://github.com/open-eid/DigiDoc4-Client/blob/master/client/images/EL_Regionaalarengu_Fond.png)
