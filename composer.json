@@ -7,6 +7,10 @@
         {
             "name": "Guido Gröön",
             "role" : "developer"
+        },
+        {
+            "name": "Petr Muzikant",
+            "role" : "developer"
         }
     ],
     "require-dev": {
@@ -39,5 +43,6 @@
     },
     "scripts": {
         "fix-php": ["prettier src/**/* --write", "prettier examples/src/* --write"]
-    }
+    },
+    "minimum-stability": "dev",
 }
