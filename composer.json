@@ -44,5 +44,5 @@
     "scripts": {
         "fix-php": ["prettier src/**/* --write", "prettier examples/src/* --write"]
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "dev"
 }
